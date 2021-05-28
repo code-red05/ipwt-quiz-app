@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--<link rel="stylesheet" href="attempt_quiz_css.css" />-->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Attempt a Quiz</title>
+    <style>
+      /*ANEESH SUBUDHI 19BCT0038 MEHUL RANA 19BCT0033 PRITH SHARMA 19BCT0097*/
+      main {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url('img/bg.jpg');
+        background-position: center;
+        background-size: cover;
+
+        /*height: 100%;
+        width: 100%;*/
+      }
+      /*.main_div {
+      }*/
+      .category_div,
+      .trending_div,
+      .quizlist_div {
+        text-align: center;
+        color: white;
+        padding: 20px;
+        margin: 20px;
+        margin-top: 40px;
+        border: 1px none;
+        border-radius: 20px;
+        background-color: rgba(27, 77, 128, 0.7);
+        margin-bottom: 100px;
+        height: 572.4px;
+      }
+      .cat_options {
+        margin: 20px 20px;
+      }
+      .quiz_list {
+        margin: 30px;
+        height: 300px;
+      }
+      .main_link {
+        background-color: rgb(0, 217, 255);
+        color: white;
+        padding: 8px 20px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.5s;
+        background-image: linear-gradient(
+          to bottom right,
+          rgb(0, 0, 0, 0),
+          rgb(10, 33, 75)
+        );
+        height: 10%;
+      }
+      .trend_list {
+        height: 300px;
+      }
+      .trend_quiz {
+        text-align: left;
+        font-size: x-large;
+        margin: 30px;
+      }
+      /*.trending_div {
+        text-align: center;
+        color: white;
+        padding: 20px;
+        margin: 20px;
+        margin-top: 40px;
+      }*/
+      .hidden {
+        display: none !important;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+      integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!--ANEESH SUBUDHI 19BCT0038 MEHUL RANA 19BCT0033 PRITH SHARMA 19BCT0097-->
+    <header>
+      <nav
+        class="navbar navbar-expand-lg navbar-dark"
+        style="background-color: #1b4d80; width: 100%; font-size: larger"
+      >
+        <a
+          href=""
+          class="navbar-brand"
+          style="font-weight: 500; font-size: 1.5rem"
+        >
+          Trivial Trivia</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">Quiz History</a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link"> Profile</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main style="height: 100%; width: 100%">
+      <div class="container-fluid">
+        <div class="row main_div">
+          <div class="col-lg-3 con1">
+            <div class="category_div">
+              <h2 style="text-align: center">Categories</h2>
+              Choose a category of your choice to attempt a quiz
+              <button
+                class="btn btn-warning btn-lg cat_options geography"
+                style="width: 200px"
+              >
+                Geography
+              </button>
+              <button
+                class="btn btn-warning btn-lg cat_options maths"
+                style="width: 200px"
+              >
+                Maths
+              </button>
+              <button
+                class="btn btn-warning btn-lg cat_options computer"
+                style="width: 200px"
+              >
+                Computer
+              </button>
+              <button
+                class="btn btn-warning btn-lg cat_options science"
+                style="width: 200px"
+              >
+                Science
+              </button>
+              <button
+                class="btn btn-warning btn-lg cat_options miscellaneous"
+                style="width: 200px"
+              >
+                Miscellaneous
+              </button>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="quizlist_div">
+              <h2 class="choose_category">👈Choose a Category</h2>
+              <h3 class="category_title">Category : Geography</h3>
+              <!--<ul
+                class="list-group quiz_list"
+                style="overflow-y: scroll; height: 400px; color: black"
+              >
+                <li class="list-group-item bg-warning" aria-current="true">
+                  Countries Quiz
+                </li>
+                <li class="list-group-item bg-warning">North America Quiz</li>
+                <li class="list-group-item bg-warning">Asia Quiz</li>
+                <li class="list-group-item bg-warning">South America Quiz</li>
+                <li class="list-group-item bg-warning">Africa Quiz</li>
+                <li class="list-group-item bg-warning">World Map Quiz</li>
+                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item">And a fifth one</li>
+              </ul>-->
+              <div
+                class="btn-group-vertical quiz_list"
+                style="overflow-y: scroll"
+              >
+                <button
+                  class="btn btn-outline-warning btn-lg"
+                  style="width: 400px"
+                >
+                  Asia Quiz
+                </button>
+                <button
+                  class="btn btn-outline-warning btn-lg"
+                  style="width: 400px"
+                >
+                  North America Quiz
+                </button>
+                <button
+                  class="btn btn-outline-warning btn-lg"
+                  style="width: 400px"
+                >
+                  South America Quiz
+                </button>
+                <button
+                  class="btn btn-outline-warning btn-lg"
+                  style="width: 400px"
+                >
+                  Africa Quiz
+                </button>
+                <button
+                  class="btn btn-outline-warning btn-lg"
+                  style="width: 400px"
+                >
+                  Europe Quiz
+                </button>
+                <!--<button
+                  class="btn btn-outline-warning btn-lg"
+                  style="width: 400px"
+                >
+                  Countries Quiz
+                </button>-->
+              </div>
+              <button class="main_link" style="width: 40%">Attempt Quiz</button>
+            </div>
+          </div>
+          <div class="col-lg-3 con3">
+            <div class="trending_div">
+              <h3 style="text-align: center">📈Trending Quizzes</h3>
+              <div class="trend_list">
+                <p class="trend_quiz">1. Geography : Asia Quiz</p>
+                <p class="trend_quiz">2. History : Medieval History</p>
+                <p class="trend_quiz">3. Geography : North America Quiz</p>
+                <p class="trend_quiz">4. Science : Human Body</p>
+                <p class="trend_quiz"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="js/attempt_quiz.js"></script>
+  </body>
+</html>
