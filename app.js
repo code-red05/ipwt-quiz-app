@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+
+app.use(express.json());
+
 app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
@@ -19,8 +22,9 @@ app.get("/attempt_quiz", (req, res) => {
 app.get("/create_quiz", (req, res) => {
   res.sendFile(__dirname + "/create_quiz.html");
 });
-app.post("/create_quiz", (req, res) => {
-  req.sendFile(__dirname + "/create_quiz.html");
+app.post("/quiz_created", (req, res) => {
+  res.send(req); //not able to display request object,please look into it
+  //res.write(req.body); //testing
 });
 
 app.listen(3000, () => {

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trivial Trivia</title>
+    <!-- <link rel="stylesheet" href="Dapage.css"> -->
+    <style>
+      body {
+        /* background-image: url(https://static.vecteezy.com/system/resources/thumbnails/001/343/485/small_2x/comic-zoom-speed-free-vector.jpg); */
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url("img/bg.jpg");
+        background-size: cover;
+        /* background-repeat: no-repeat; */
+        background-position: center;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body style="color: white; font-family: Arial, Helvetica, sans-serif">
+    <form action="/quiz_created" method="post" style="margin: 0 auto" id="form">
+      <h1 align="center" style="font-size: 50px">Create Quiz</h1>
+      <!-- <h3 align="center"> -->
+      <center>
+        <label for="Combobox">Which domain does your question belong to?</label
+        ><br /><br />
+        <select name="category" id="Combobox">
+          <optgroup label="Combobox">
+            <option value="SELECT">SELECT A CATEGORY</option>
+            <option value="Geography">Geography</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Computers">Computers</option>
+            <option value="Science">Science</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+          </optgroup></select
+        ><br /><br />
+        <label for="question">Enter your question:</label><br /><br />
+        <textarea
+          id="question"
+          name="question"
+          rows="10"
+          cols="50"
+          placeholder="Enter your question"
+        >
+        </textarea
+        ><br />
+        <br />
+        <label for="option">Add options:</label><br /><br />
+        <input type="text" id="option1" name="optiona" />
+        <input type="checkbox" id="optiona" name="optiona" /><br />
+        <input type="text" id="option2" name="optionb" />
+        <input type="checkbox" id="optionb" name="optionb" /><br />
+        <input type="text" id="option3" name="optionc" />
+        <input type="checkbox" id="optionc" name="optionc" /><br />
+        <input type="text" id="option4" name="optiond" />
+        <input type="checkbox" id="optiond" name="optiond" /><br />
+        <input
+          type="submit"
+          value="Add question"
+          onclick="AddRow()"
+        /><br /><br /><!--testing only for one question first-->
+        <!-- <button type="submit" form="sub" value="Submit">Submit all questions</button><br><br> -->
+        <!-- </h3> -->
+      </center>
+    </form>
+    <h3>
+      <table border="4" id="show" align="center">
+        <thead>
+          <tr>
+            <th>Domain</th>
+            <th>Question</th>
+            <th>Option 1</th>
+            <th>Option 2</th>
+            <th>Option 3</th>
+            <th>Option 4</th>
+            <th>Correct Answer</th>
+          </tr>
+        </thead>
+      </table>
+    </h3>
+    <script>
+      var list1 = [];
+      var list2 = [];
+      var list3 = [];
+      var list4 = [];
+      var list5 = [];
+      var list6 = [];
+      var list7 = [];
+      var n = 1;
+      var x = 0;
+
+      $("#form").submit(function (e) {
+        //we need to use
+        //console.log(document.getElementById("form").elements);
+        var AddRown = document.getElementById("show");
+        var NewRow = AddRown.insertRow(n);
+        list1[x] = document.getElementById("Combobox").value;
+        list2[x] = document.getElementById("question").value;
+        list3[x] = document.getElementById("option1").value;
+        list4[x] = document.getElementById("option2").value;
+        list5[x] = document.getElementById("option3").value;
+        list6[x] = document.getElementById("option4").value;
+        if (document.getElementById("optiona").checked) {
+          list7[x] = "Option 1";
+        }
+        if (document.getElementById("optionb").checked) {
+          list7[x] = "Option 2";
+        }
+        if (document.getElementById("optionc").checked) {
+          list7[x] = "Option 3";
+        }
+        if (document.getElementById("optiond").checked) {
+          list7[x] = "Option 4";
+        }
+        var cel1 = NewRow.insertCell(0);
+        var cel2 = NewRow.insertCell(1);
+        var cel3 = NewRow.insertCell(2);
+        var cel4 = NewRow.insertCell(3);
+        var cel5 = NewRow.insertCell(4);
+        var cel6 = NewRow.insertCell(5);
+        var cel7 = NewRow.insertCell(6);
+        cel1.innerHTML = list1[x];
+        cel2.innerHTML = list2[x];
+        cel3.innerHTML = list3[x];
+        cel4.innerHTML = list4[x];
+        cel5.innerHTML = list5[x];
+        cel6.innerHTML = list6[x];
+        cel7.innerHTML = list7[x];
+        n++;
+        x++;
+        e.preventDefault();
+      });
+    </script>
+  </body>
+</html>
