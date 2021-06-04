@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { Schema, Model } = mongoose;
+const { Schema } = mongoose;
 //each category model will contain 2 fields
 const category = new Schema({
   quizid: {
@@ -13,11 +13,11 @@ const category = new Schema({
 });
 
 //following are models for each category
-const Geography = new Model("Geography", category);
-const Maths = new Model("Maths", category);
-const Science = new Model("Science", category);
-const Miscellaneous = new Model("Miscellaneous", category);
-const Computer = new Model("Computer", category);
+const Geography = mongoose.model("Geography", category);
+const Maths = mongoose.model("Maths", category);
+const Science = mongoose.model("Science", category);
+const Miscellaneous = mongoose.model("Miscellaneous", category);
+const Computer = mongoose.model("Computer", category);
 
 module.exports = {
   Geography,
