@@ -159,8 +159,8 @@ app.post("/view_results", (req, res) => {
           status.push("Wrong");
         }
       }
-      console.log(score);
-      console.log(status);
+      //console.log(score);
+      //console.log(status);
       results = {
         quizid,
         quizname,
@@ -174,7 +174,7 @@ app.post("/view_results", (req, res) => {
         score,
         status,
       };
-      res.render("viewResults", results);
+      res.render("views/viewResults", results);
     })
     .catch((e) => {
       console.log(e);
