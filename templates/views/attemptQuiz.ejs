@@ -203,9 +203,13 @@
                 class="btn-group-vertical quiz_list"
                 style="overflow-y: auto; width: 450px"
               ></div>
-              <button class="main_link" style="width: 40%; vertical-align: 70%">
+              <form action="/attempt_quiz" method="POST" id="display_quiz">
+              <input type="hidden" value="" name="quizid" id="quizid">
+              <input type="hidden" value="" name="category" id="category">
+              <button type="button" class="main_link" style="width: 40%; vertical-align: 70%">
                 Attempt Quiz
               </button>
+              </form>
             </div>
           </div>
           <div class="col-lg-3 con3">

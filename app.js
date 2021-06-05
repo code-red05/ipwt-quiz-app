@@ -94,9 +94,9 @@ app.get("/attempt_quiz", (req, res) => {
   res.render("views/attemptQuiz");
 });
 
-app.get("/attempt_quiz/:category/:id", (req, res) => {
-  const quizid = req.params.id;
-  const cat = req.params.category;
+app.post("/attempt_quiz", (req, res) => {
+  const quizid = req.body.quizid;
+  const cat = req.body.category;
 
   console.log(quizid);
   console.log(cat);
