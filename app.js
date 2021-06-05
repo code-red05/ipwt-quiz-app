@@ -94,6 +94,34 @@ app.get("/attempt_quiz", (req, res) => {
   res.render("views/attemptQuiz");
 });
 
+app.get("/attempt_quiz/:category/:id", (req, res) => {
+  const quizid = req.params.id;
+  const cat = req.params.category;
+
+  console.log(quizid);
+  console.log(cat);
+  if (cat === "Geography") {
+    quizgrp = GeographyQuiz.findOne({ quizid });
+  } else if (cat === "Science") {
+    quizgrp = ScienceQuiz.findOne({ quizid });
+  } else if (cat === "Maths") {
+    quizgrp = MathsQuiz.findOne({ quizid });
+  } else if (cat === "Computer") {
+    quizgrp = ComputerQuiz.findOne({ quizid });
+  } else if (cat === "Miscellaneous") {
+    quizgrp = MiscellaneousQuiz.findOne({ quizid });
+  }
+
+  quizgrp
+    .then((quiz) => {
+      console.log(quiz);
+      res.render("views/displayQuiz", quiz);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 //to access create_quiz page
 app.get("/create_quiz", (req, res) => {
   res.sendFile(__dirname + "/create_quiz.html");
