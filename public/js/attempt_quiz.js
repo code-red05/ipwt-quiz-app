@@ -114,7 +114,12 @@ for (let i = 0; i < categoryBtns.length; i++) {
 
 attemptQuiz.addEventListener("click", () => {
   console.log(quizID);
-  // window.location.href = `/attempt_quiz/${cat}/${quizID}`;
+  //window.location.href = `/attempt_quiz?cat=${cat}&id=${quizID}`;
+  var form_main = document.getElementById("display_quiz");
+  document.getElementById("quizid").setAttribute("value", quizID);
+  document.getElementById("category").setAttribute("value", cat);
+  form_main.submit();
+
   // if (quizid !== "") {
   //   fetch("");
   // }

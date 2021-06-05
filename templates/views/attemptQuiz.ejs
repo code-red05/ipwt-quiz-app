@@ -203,8 +203,11 @@
                 class="btn-group-vertical quiz_list"
                 style="overflow-y: auto; width: 450px"
               ></div>
-              <form action="" method="get" class="quiz_form">
+              <form action="/attempt_quiz" method="POST" id="display_quiz">
+                <input type="hidden" value="" name="quizid" id="quizid" />
+                <input type="hidden" value="" name="category" id="category" />
                 <button
+                  type="button"
                   class="main_link"
                   style="width: 40%; vertical-align: 70%"
                 >
