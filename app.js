@@ -1,7 +1,9 @@
 const express = require("express");
+const ejs = require("ejs");
 const app = express();
 const bodyParser = require("body-parser");
 const path = require("path");
+const fetch = require("node-fetch");
 require("./src/db/mongoose"); //mongoose connection
 const { MongoClient, ObjectID } = require("mongodb");
 //import models
@@ -19,7 +21,6 @@ const {
   MiscellaneousQuiz,
   ComputerQuiz,
 } = require("./src/models/quizzes");
-const { isValidObjectId } = require("mongoose");
 
 //app.use(express.json());
 //request body parsing
@@ -27,6 +28,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + "/public"));
+
+//for setting template engine
+app.set("view engine", "ejs");
+app.set("views", "./templates");
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/home.html");
@@ -38,10 +43,58 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {});
 
-app.get("/attempt_quiz", (req, res) => {
-  res.sendFile(__dirname + "/attempt_quiz.html");
+//to fetch quizzes of a particular category
+app.get("/quizcat", (req, res) => {
+  if (!req.query.category) {
+    return console.log("Error displaying quizzes");
+  }
+  const quizctg = req.query.category;
+
+  let quizgrp;
+  if (quizctg == "Geography") {
+    quizgrp = GeographyQuiz.find({}, { quizid: 1, quizname: 1 });
+  } else if (quizctg == "Science") {
+    quizgrp = ScienceQuiz.find({}, { quizid: 1, quizname: 1 });
+  } else if (quizctg == "Maths") {
+    quizgrp = MathsQuiz.find({}, { quizid: 1, quizname: 1 });
+  } else if (quizctg == "Computer") {
+    quizgrp = ComputerQuiz.find({}, { quizid: 1, quizname: 1 });
+  } else if (quizctg == "Miscellaneous") {
+    quizgrp = MiscellaneousQuiz.find({}, { quizid: 1, quizname: 1 });
+  }
+  quizgrp
+    .then((quizzes) => {
+      res.send(quizzes).statusCode(200);
+    })
+    .catch((error) => {
+      res.send(error).statusCode(404);
+    });
 });
 
+//to access attempt quiz page,select category,select quiz and attempt test
+app.get("/attempt_quiz", (req, res) => {
+  //res.sendFile(__dirname + "/attempt_quiz.html");
+  // res.render("views/attemptQuiz");
+  //console.log(req.query.category);
+  // console.log(GeographyQuiz.find({}, { quizname: 1 }));
+  // const quizcat = req.query.category;
+
+  // let quizgrp;
+  // if (quizcat == "Geography") {
+  //   quizgrp = GeographyQuiz.find({}, { quizname: 1 });
+  // } else if (quizcat == "Science") {
+  //   quizgrp = ScienceQuiz.find({}, { quizname: 1 });
+  // } else if (quizcat == "Maths") {
+  //   quizgrp = MathsQuiz.find({}, { quizname: 1 });
+  // } else if (quizcat == "Computer") {
+  //   quizgrp = ComputerQuiz.find({}, { quizname: 1 });
+  // } else if (quizcat == "Miscellaneous") {
+  //   quizgrp = MiscellaneousQuiz.find({}, { quizname: 1 });
+  // }
+  res.render("views/attemptQuiz");
+});
+
+//to access create_quiz page
 app.get("/create_quiz", (req, res) => {
   res.sendFile(__dirname + "/create_quiz.html");
 });
