@@ -115,6 +115,7 @@ app.post("/attempt_quiz", (req, res) => {
   quizgrp
     .then((quiz) => {
       console.log(quiz);
+      quiz.category = cat;
       res.render("views/displayQuiz", quiz);
     })
     .catch((error) => {
@@ -122,8 +123,62 @@ app.post("/attempt_quiz", (req, res) => {
     });
 });
 
-app.post("/view_results?quizid", (req, res) => {
-  res.send(req.body);
+app.post("/view_results", (req, res) => {
+  const { quizid, category, marked } = req.body;
+  if (category === "Geography") {
+    quizgrp = GeographyQuiz.findOne({ quizid });
+  } else if (category === "Science") {
+    quizgrp = ScienceQuiz.findOne({ quizid });
+  } else if (category === "Maths") {
+    quizgrp = MathsQuiz.findOne({ quizid });
+  } else if (category === "Computer") {
+    quizgrp = ComputerQuiz.findOne({ quizid });
+  } else if (category === "Miscellaneous") {
+    quizgrp = MiscellaneousQuiz.findOne({ quizid });
+  }
+
+  let score = 0; //score
+  let status = []; //status : right/wrong
+  quizgrp
+    .then((resquiz) => {
+      console.log(resquiz);
+      const {
+        quizname,
+        correct,
+        optiona,
+        optionb,
+        optionc,
+        optiond,
+        question,
+      } = resquiz;
+      for (let i = 0; i < marked.length; i++) {
+        if (correct[i] === resquiz[marked[i]][i]) {
+          score++;
+          status.push("Right");
+        } else {
+          status.push("Wrong");
+        }
+      }
+      console.log(score);
+      console.log(status);
+      results = {
+        quizid,
+        quizname,
+        category,
+        question,
+        optiona,
+        optionb,
+        optionc,
+        optiond,
+        correct,
+        score,
+        status,
+      };
+      res.render("viewResults", results);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 });
 
 //to access create_quiz page

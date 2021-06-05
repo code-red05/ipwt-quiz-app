@@ -32,7 +32,7 @@
         width: 60%;
         margin-bottom: 40px;
       }
-      .question_each .question_each {
+      .question_each {
         width: 80%;
         margin: auto;
         margin-top: 30px;
@@ -98,8 +98,9 @@
     />
   </head>
   <body>
-    <form action="/view_results" method="POST">
-      <input type="hidden" value="<% quizid %>" name="quizid" />
+    <form action="/view_results?<%= quizid %>" method="POST">
+      <input type="hidden" value="<%= quizid %>" name="quizid" />
+      <input type="hidden" value="<%= category %>" name="category" />
       <div class="questions_view">
         <h1 class="text-warning" style="text-align: center"><%= quizname%></h1>
         <br />
@@ -109,14 +110,14 @@
         <% question.forEach(function(e, i){ %>
         <div class="question_each">
           <p><%= (i+1) %>. <%= e %></p>
-          <input type="radio" name="marked[<%= i %>]" value="a" /><%= optiona[i]
-          %><br />
-          <input type="radio" name="marked[<%= i %>]" value="b" /><%= optionb[i]
-          %><br />
-          <input type="radio" name="marked[<%= i %>]" value="c" /><%= optionc[i]
-          %><br />
-          <input type="radio" name="marked[<%= i %>]" value="d" /><%= optiond[i]
-          %><br />
+          <input type="radio" name="marked[<%= i %>]" value="optiona" /><%=
+          optiona[i] %><br />
+          <input type="radio" name="marked[<%= i %>]" value="optionb" /><%=
+          optionb[i] %><br />
+          <input type="radio" name="marked[<%= i %>]" value="optionc" /><%=
+          optionc[i] %><br />
+          <input type="radio" name="marked[<%= i %>]" value="optiond" /><%=
+          optiond[i] %><br />
         </div>
         <% }) %>
         <center>
