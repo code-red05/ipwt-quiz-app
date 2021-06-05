@@ -95,7 +95,7 @@
     />
   </head>
   <body>
-    <form action="/view_results" method="POST">
+    <form action="/view_results?<% quizid %>" method="POST">
       <input type="hidden" value="<% quizid %>" name="quizid" />
       <div class="questions_view">
         <h1 class="text-warning" style="text-align: center"><%= quizname%></h1>

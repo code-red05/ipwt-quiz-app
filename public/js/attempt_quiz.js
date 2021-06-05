@@ -10,6 +10,7 @@ const categoryTitle = document.querySelector(".category_title");
 const quizList = document.querySelector(".quiz_list");
 const quizListItems = document.querySelectorAll(".btn-outline-warning");
 const chooseCategory = document.querySelector(".choose_category");
+const quizForm = document.querySelector(".quiz_form");
 let categoryBtns = [
   geographyBtn,
   mathsBtn,
@@ -48,7 +49,7 @@ const hideList = function () {
 };
 hideList();
 let quizID;
-let ctg;
+let cat;
 let defbgcolor;
 let defcolor;
 
@@ -92,6 +93,7 @@ for (let i = 0; i < categoryBtns.length; i++) {
                   quizBtn.style.color = "black";
                   quizID = quizzes[i].quizid;
                   cat = cattext;
+                  quizForm.action = `/attempt_quiz/${cat}/${quizID}`;
                 });
 
                 quizBtn.textContent = quizzes[i].quizname;
@@ -112,7 +114,7 @@ for (let i = 0; i < categoryBtns.length; i++) {
 
 attemptQuiz.addEventListener("click", () => {
   console.log(quizID);
-  window.location.href = `/attempt_quiz/${cat}/${quizID}`;
+  // window.location.href = `/attempt_quiz/${cat}/${quizID}`;
   // if (quizid !== "") {
   //   fetch("");
   // }

@@ -122,6 +122,10 @@ app.get("/attempt_quiz/:category/:id", (req, res) => {
     });
 });
 
+app.post("/view_results?quizid", (req, res) => {
+  res.send(req.body);
+});
+
 //to access create_quiz page
 app.get("/create_quiz", (req, res) => {
   res.sendFile(__dirname + "/create_quiz.html");
