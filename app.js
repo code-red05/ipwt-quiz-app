@@ -5,6 +5,11 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const fetch = require("node-fetch");
 require("./src/db/mongoose"); //mongoose connection
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+app.use(cookieParser());
+app.use(session({secret: "Shh, its a secret!"}));
+
 const { MongoClient, ObjectID } = require("mongodb");
 //import models
 const {
@@ -22,6 +27,10 @@ const {
   ComputerQuiz,
 } = require("./src/models/quizzes");
 
+const {
+  User
+} = require("./src/models/users");
+
 const { Submission } = require("./src/models/submissions");
 
 //app.use(express.json());
@@ -36,20 +45,57 @@ app.set("view engine", "ejs");
 app.set("views", "./templates");
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/home.html");
+  if(req.session.username) 
+    res.render("views/home",{logged_in: true, username: req.session.username});
+  else
+    res.render("views/home",{logged_in: false, username: null});
 });
 
 app.get("/login", (req, res) => {
-  res.sendFile(__dirname + "/login.html");
+  res.render("views/login",{error: false});
 });
 
-app.post("/login", (req, res) => {});
+app.post("/login", (req, res) => {
+  let userinfo = User.findOne({username: req.body.nm});
+  userinfo.then((user)=>{
+    if(user == null)
+      res.render("views/login", {error: "Username does not exist"});
+    else{
+      if(user.password == req.body.pwd){
+        req.session.username = user.username;
+        console.log(req.session);
+        res.redirect("/");
+      }
+      else
+        res.render("views/login", {error: "Incorrect Password"});
+    }
+  })
+});
 
 app.get("/signup", (req, res) => {
-  res.sendFile(__dirname + "/signup.html");
+  res.render("views/signup",{error: false});
 });
 
-app.post("/signup", (req, res) => {});
+app.post("/signup", (req, res) => {
+  if(req.body.pwd==req.body.pwd2){
+    let username = req.body.nm;
+    let password = req.body.pwd;
+    const user =  {
+      username,
+      password
+    };
+    const new_user = new User(user);
+    new_user.save().then(()=>{
+      console.log("New user created!");
+      res.redirect("/login");
+    }).catch((error)=>{
+      console.log(error);
+      res.render("views/signup",{error: "Username already taken!"});
+    });
+  }
+  else
+  res.render("views/signup",{error: "Passwords do not match!"});
+});
 
 //to fetch quizzes of a particular category
 app.get("/quizcat", (req, res) => {
@@ -99,7 +145,10 @@ app.get("/attempt_quiz", (req, res) => {
   // } else if (quizcat == "Miscellaneous") {
   //   quizgrp = MiscellaneousQuiz.find({}, { quizname: 1 });
   // }
-  res.render("views/attemptQuiz");
+  if(req.session.username)
+    res.render("views/attemptQuiz",{username: req.session.username});
+  else
+    res.render("views/login",{error: "Please Login First"});
 });
 
 app.post("/attempt_quiz", (req, res) => {
@@ -171,7 +220,7 @@ app.post("/view_results", (req, res) => {
       //console.log(status);
 
       //submissions save
-      const sub = { category, quizid: new ObjectID(quizid), quizname, score };
+      const sub = {username: req.session.username, category, quizid: new ObjectID(quizid), quizname, score };
       const newSub = new Submission(sub);
       newSub
         .save()
@@ -206,7 +255,10 @@ app.post("/view_results", (req, res) => {
 
 //to access create_quiz page
 app.get("/create_quiz", (req, res) => {
-  res.sendFile(__dirname + "/create_quiz.html");
+  if(req.session.username)
+    res.sendFile(__dirname + "/create_quiz.html");
+  else
+    res.render("views/login",{error: "Please Login First"});
 });
 
 //quiz created and saved to database
@@ -262,11 +314,11 @@ app.post("/quiz_created", (req, res) => {
 
 //to display quiz history
 app.get("/quiz_history", (req, res) => {
-  const subs = Submission.find({});
+  const subs = Submission.find({username: req.session.username});
   subs
     .then((subms) => {
       console.log(subms);
-      res.render("views/quizHistory", { subs: subms });
+      res.render("views/quizHistory", {username: req.session.username, subs: subms });
     })
     .catch((error) => {
       console.log(error);
