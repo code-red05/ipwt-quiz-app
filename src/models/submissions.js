@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const submission = new Schema({
+  username: {
+    type: String,
+    required: true
+  },
   category: {
     type: String,
     required: true,
