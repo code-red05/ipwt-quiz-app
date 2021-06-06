@@ -22,6 +22,8 @@ const {
   ComputerQuiz,
 } = require("./src/models/quizzes");
 
+const { Submission } = require("./src/models/submissions");
+
 //app.use(express.json());
 //request body parsing
 app.use(bodyParser.json());
@@ -167,6 +169,20 @@ app.post("/view_results", (req, res) => {
       }
       //console.log(score);
       //console.log(status);
+
+      //submissions save
+      const sub = { category, quizid: new ObjectID(quizid), quizname, score };
+      const newSub = new Submission(sub);
+      newSub
+        .save()
+        .then(() => {
+          console.log("Successful!");
+          console.log(newSub);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
       results = {
         quizid,
         quizname,
@@ -242,6 +258,19 @@ app.post("/quiz_created", (req, res) => {
     });
   //object successfully getting stored in database!
   //
+});
+
+//to display quiz history
+app.get("/quiz_history", (req, res) => {
+  const subs = Submission.find({});
+  subs
+    .then((subms) => {
+      console.log(subms);
+      res.render("views/quizHistory", { subs: subms });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 app.listen(3000, () => {
