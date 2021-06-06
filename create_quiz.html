@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Quiz</title>
+    <title>Trivial Trivia</title>
     <!-- <link rel="stylesheet" href="Dapage.css"> -->
     <link
       rel="stylesheet"
@@ -13,6 +13,16 @@
       crossorigin="anonymous"
     />
     <style>
+      input[type="text"] {
+        border-radius: 5px;
+        margin: 3px;
+        outline: none;
+      }
+      textarea {
+        border-radius: 10px;
+        margin: 5px;
+        outline: none;
+      }
       body {
         /* background-image: url(https://static.vecteezy.com/system/resources/thumbnails/001/343/485/small_2x/comic-zoom-speed-free-vector.jpg); */
         background-image: linear-gradient(
@@ -25,380 +35,347 @@
         background-position: center;
         background-attachment: fixed;
       }
+      .question_each {
+        width: 80%;
+        margin: auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border: 1px solid white;
+        border-radius: 20px;
+        padding: 10px;
+      }
+      .questions_view {
+        color: white;
+        padding: 20px;
+        margin: auto;
+        margin-top: 40px;
+        border: 1px none;
+        border-radius: 20px;
+        background-color: rgba(27, 77, 128, 0.7);
+        width: 60%;
+        margin-bottom: 40px;
+        padding: 20px 20px;
+      }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body style="color: white; font-family: Arial, Helvetica, sans-serif">
     <form action="/quiz_created" method="post" style="margin: 0 auto" id="form">
-      <h1 align="center" style="font-size: 50px">Create Quiz</h1>
-      <!-- <h3 align="center"> -->
-      <center>
-        <label for="Combobox">Which domain does your question belong to?</label
-        ><br /><br />
-        <select name="category" id="Combobox">
-          <optgroup label="Combobox">
-            <option value="SELECT">SELECT A CATEGORY</option>
-            <option value="Geography">Geography</option>
-            <option value="Mathematics">Mathematics</option>
-            <option value="Computers">Computers</option>
-            <option value="Science">Science</option>
-            <option value="Miscellaneous">Miscellaneous</option>
-          </optgroup></select
-        ><br /><br />
-        <label for="quizname">Quiz Name</label><br />
-        <textarea
-          id="quizname"
-          name="quizname"
-          rows="2"
-          cols="50"
-          placeholder="Enter quiz name"
-        >
-        </textarea>
+      <div class="questions_view">
+        <h1 class="text-warning" align="center" style="font-size: 50px">
+          Create Quiz
+        </h1>
+        <!-- <h3 align="center"> -->
+        <center>
+          <label for="Combobox"
+            >Which domain does your question belong to?</label
+          ><br /><br />
+          <select name="category" id="Combobox">
+            <optgroup label="Combobox">
+              <option value="SELECT">SELECT A CATEGORY</option>
+              <option value="Geography">Geography</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Computers">Computers</option>
+              <option value="Science">Science</option>
+              <option value="Miscellaneous">Miscellaneous</option>
+            </optgroup></select
+          ><br /><br />
+          <label for="quizname">Quiz Name</label><br />
+          <textarea
+            id="quizname"
+            name="quizname"
+            rows="2"
+            cols="50"
+            placeholder="Enter quiz name"
+          >
+          </textarea>
 
-        <br /><br />
+          <br /><br />
 
-        <hr
-          style="
-            border-style: dotted;
-            border-color: white;
-            border-width: 5px 0 0 0;
-            /* border-radius: 100%; */
-            width: 60%;
-            margin: 40px 0;
-          "
-        />
+          <!-- <hr
+            style="
+              border-style: dotted;
+              border-color: white;
+              border-width: 5px 0 0 0;
+              /* border-radius: 100%; */
+              width: 60%;
+              margin: 40px 0;
+            "
+          /> -->
 
-        <!-- Question 1 -->
-        <label for="question">1 . Enter your question:</label><br /><br />
-        <textarea
-          id="question"
-          name="question[]"
-          rows="3"
-          cols="50"
-          placeholder="Enter your question"
-        >
-        </textarea
-        ><br />
-        <br />
-        <label for="option">Add options:</label><br /><br />
-        <input type="text" id="optiona" name="optiona[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option1"
-          value="optiona"
-        /><br />
-        <input type="text" id="optionb" name="optionb[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option2"
-          value="optionb"
-        /><br />
-        <input type="text" id="optionc" name="optionc[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option3"
-          value="optionc"
-        /><br />
-        <input type="text" id="optiond" name="optiond[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option4"
-          value="optiond"
-        /><br />
+          <!-- Question 1 -->
+          <div class="question_each">
+            <label for="question">1 . Enter your question:</label><br /><br />
+            <textarea
+              id="question"
+              name="question[]"
+              rows="3"
+              cols="50"
+              placeholder="Enter your question"
+            >
+            </textarea
+            ><br />
+            <br />
+            <label for="option">Add options:</label><br /><br />
+            <input type="text" id="optiona" name="optiona[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option1"
+              value="optiona"
+            /><br />
+            <input type="text" id="optionb" name="optionb[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option2"
+              value="optionb"
+            /><br />
+            <input type="text" id="optionc" name="optionc[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option3"
+              value="optionc"
+            /><br />
+            <input type="text" id="optiond" name="optiond[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option4"
+              value="optiond"
+            /><br />
+          </div>
 
-        <hr
-          style="
-            border-style: dotted;
-            border-color: white;
-            border-width: 5px 0 0 0;
-            /* border-radius: 100%; */
-            width: 60%;
-            margin: 40px 0;
-          "
-        />
+          <!-- <hr
+            style="
+              border-style: dotted;
+              border-color: white;
+              border-width: 5px 0 0 0;
+              /* border-radius: 100%; */
+              width: 60%;
+              margin: 40px 0;
+            "
+          /> -->
 
-        <!-- Question 2-->
-        <label for="question">2 . Enter your question:</label><br /><br />
-        <textarea
-          id="question"
-          name="question[]"
-          rows="3"
-          cols="50"
-          placeholder="Enter your question"
-        >
-        </textarea
-        ><br />
-        <br />
-        <label for="option">Add options:</label><br /><br />
-        <input type="text" id="optiona" name="optiona[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option1"
-          value="optiona"
-        /><br />
-        <input type="text" id="optionb" name="optionb[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option2"
-          value="optionb"
-        /><br />
-        <input type="text" id="optionc" name="optionc[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option3"
-          value="optionc"
-        /><br />
-        <input type="text" id="optiond" name="optiond[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option4"
-          value="optiond"
-        /><br />
+          <!-- Question 2-->
+          <div class="question_each">
+            <label for="question">2 . Enter your question:</label><br /><br />
+            <textarea
+              id="question"
+              name="question[]"
+              rows="3"
+              cols="50"
+              placeholder="Enter your question"
+            >
+            </textarea
+            ><br />
+            <br />
+            <label for="option">Add options:</label><br /><br />
+            <input type="text" id="optiona" name="optiona[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option1"
+              value="optiona"
+            /><br />
+            <input type="text" id="optionb" name="optionb[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option2"
+              value="optionb"
+            /><br />
+            <input type="text" id="optionc" name="optionc[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option3"
+              value="optionc"
+            /><br />
+            <input type="text" id="optiond" name="optiond[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option4"
+              value="optiond"
+            /><br />
+          </div>
 
-        <hr
-          style="
-            border-style: dotted;
-            border-color: white;
-            border-width: 5px 0 0 0;
-            /* border-radius: 100%; */
-            width: 60%;
-            margin: 40px 0;
-          "
-        />
+          <!-- <hr
+            style="
+              border-style: dotted;
+              border-color: white;
+              border-width: 5px 0 0 0;
+              /* border-radius: 100%; */
+              width: 60%;
+              margin: 40px 0;
+            "
+          /> -->
 
-        <!-- Question 3-->
-        <label for="question">3 . Enter your question:</label><br /><br />
-        <textarea
-          id="question"
-          name="question[]"
-          rows="3"
-          cols="50"
-          placeholder="Enter your question"
-        >
-        </textarea
-        ><br />
-        <br />
-        <label for="option">Add options:</label><br /><br />
-        <input type="text" id="optiona" name="optiona[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option1"
-          value="optiona"
-        /><br />
-        <input type="text" id="optionb" name="optionb[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option2"
-          value="optionb"
-        /><br />
-        <input type="text" id="optionc" name="optionc[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option3"
-          value="optionc"
-        /><br />
-        <input type="text" id="optiond" name="optiond[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option4"
-          value="optiond"
-        /><br />
+          <!-- Question 3-->
+          <div class="question_each">
+            <label for="question">3 . Enter your question:</label><br /><br />
+            <textarea
+              id="question"
+              name="question[]"
+              rows="3"
+              cols="50"
+              placeholder="Enter your question"
+            >
+            </textarea
+            ><br />
+            <br />
+            <label for="option">Add options:</label><br /><br />
+            <input type="text" id="optiona" name="optiona[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option1"
+              value="optiona"
+            /><br />
+            <input type="text" id="optionb" name="optionb[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option2"
+              value="optionb"
+            /><br />
+            <input type="text" id="optionc" name="optionc[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option3"
+              value="optionc"
+            /><br />
+            <input type="text" id="optiond" name="optiond[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option4"
+              value="optiond"
+            /><br />
+          </div>
 
-        <hr
-          style="
-            border-style: dotted;
-            border-color: white;
-            border-width: 5px 0 0 0;
-            /* border-radius: 100%; */
-            width: 60%;
-            margin: 40px 0;
-          "
-        />
+          <!-- <hr
+            style="
+              border-style: dotted;
+              border-color: white;
+              border-width: 5px 0 0 0;
+              /* border-radius: 100%; */
+              width: 60%;
+              margin: 40px 0;
+            "
+          /> -->
 
-        <!-- Question 4-->
-        <label for="question">4 . Enter your question:</label><br /><br />
-        <textarea
-          id="question"
-          name="question[]"
-          rows="3"
-          cols="50"
-          placeholder="Enter your question"
-        >
-        </textarea
-        ><br />
-        <br />
-        <label for="option">Add options:</label><br /><br />
-        <input type="text" id="optiona" name="optiona[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option1"
-          value="optiona"
-        /><br />
-        <input type="text" id="optionb" name="optionb[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option2"
-          value="optionb"
-        /><br />
-        <input type="text" id="optionc" name="optionc[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option3"
-          value="optionc"
-        /><br />
-        <input type="text" id="optiond" name="optiond[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option4"
-          value="optiond"
-        /><br />
+          <!-- Question 4-->
+          <div class="question_each">
+            <label for="question">4 . Enter your question:</label><br /><br />
+            <textarea
+              id="question"
+              name="question[]"
+              rows="3"
+              cols="50"
+              placeholder="Enter your question"
+            >
+            </textarea
+            ><br />
+            <br />
+            <label for="option">Add options:</label><br /><br />
+            <input type="text" id="optiona" name="optiona[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option1"
+              value="optiona"
+            /><br />
+            <input type="text" id="optionb" name="optionb[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option2"
+              value="optionb"
+            /><br />
+            <input type="text" id="optionc" name="optionc[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option3"
+              value="optionc"
+            /><br />
+            <input type="text" id="optiond" name="optiond[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option4"
+              value="optiond"
+            /><br />
+          </div>
 
-        <hr
-          style="
-            border-style: dotted;
-            border-color: white;
-            border-width: 5px 0 0 0;
-            /* border-radius: 100%; */
-            width: 60%;
-            margin: 40px 0;
-          "
-        />
+          <!-- <hr
+            style="
+              border-style: dotted;
+              border-color: white;
+              border-width: 5px 0 0 0;
+              /* border-radius: 100%; */
+              width: 60%;
+              margin: 40px 0;
+            "
+          /> -->
 
-        <!-- Question 5-->
-        <label for="question">5 . Enter your question:</label><br /><br />
-        <textarea
-          id="question"
-          name="question[]"
-          rows="3"
-          cols="50"
-          placeholder="Enter your question"
-        >
-        </textarea
-        ><br />
-        <br />
-        <label for="option">Add options:</label><br /><br />
-        <input type="text" id="optiona" name="optiona[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option1"
-          value="optiona"
-        /><br />
-        <input type="text" id="optionb" name="optionb[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option2"
-          value="optionb"
-        /><br />
-        <input type="text" id="optionc" name="optionc[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option3"
-          value="optionc"
-        /><br />
-        <input type="text" id="optiond" name="optiond[]" />
-        <input
-          type="checkbox"
-          name="correct[]"
-          id="option4"
-          value="optiond"
-        /><br /><br />
-
-        <!-- <input type="submit" value="Add question" onclick="AddRow()" /> -->
-        <input
-          type="submit"
-          value="Submit questions"
-          class="btn btn-warning btn-lg cat_options computer"
-          style="width: 200px"
-        />
-        <br /><br />
-      </center>
+          <!-- Question 5-->
+          <div class="question_each">
+            <label for="question">5 . Enter your question:</label><br /><br />
+            <textarea
+              id="question"
+              name="question[]"
+              rows="3"
+              cols="50"
+              placeholder="Enter your question"
+            >
+            </textarea
+            ><br />
+            <br />
+            <label for="option">Add options:</label><br /><br />
+            <input type="text" id="optiona" name="optiona[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option1"
+              value="optiona"
+            /><br />
+            <input type="text" id="optionb" name="optionb[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option2"
+              value="optionb"
+            /><br />
+            <input type="text" id="optionc" name="optionc[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option3"
+              value="optionc"
+            /><br />
+            <input type="text" id="optiond" name="optiond[]" />
+            <input
+              type="checkbox"
+              name="correct[]"
+              id="option4"
+              value="optiond"
+            /><br /><br />
+          </div>
+          <!-- <input type="submit" value="Add question" onclick="AddRow()" /> -->
+          <input
+            type="submit"
+            value="Submit questions"
+            class="btn btn-warning btn-lg cat_options computer"
+            style="width: 200px"
+          />
+          <br /><br />
+        </center>
+      </div>
     </form>
-    <!-- <h3>
-      <table border="4" id="show" align="center">
-        <thead>
-          <tr>
-            <th>Domain</th>
-            <th>Question</th>
-            <th>Option 1</th>
-            <th>Option 2</th>
-            <th>Option 3</th>
-            <th>Option 4</th>
-            <th>Correct Answer</th>
-          </tr>
-        </thead>
-      </table>
-    </h3>
-    <script>
-      var list1 = [];
-      var list2 = [];
-      var list3 = [];
-      var list4 = [];
-      var list5 = [];
-      var list6 = [];
-      var list7 = [];
-      var n = 1;
-      var x = 0;
-
-      $("#form").submit(function (e) {
-        //we need to use
-        //console.log(document.getElementById("form").elements);
-        var AddRown = document.getElementById("show");
-        var NewRow = AddRown.insertRow(n);
-        list1[x] = document.getElementById("Combobox").value;
-        list2[x] = document.getElementById("question").value;
-        list3[x] = document.getElementById("option1").value;
-        list4[x] = document.getElementById("option2").value;
-        list5[x] = document.getElementById("option3").value;
-        list6[x] = document.getElementById("option4").value;
-        if (document.getElementById("optiona").checked) {
-          list7[x] = "Option 1";
-        }
-        if (document.getElementById("optionb").checked) {
-          list7[x] = "Option 2";
-        }
-        if (document.getElementById("optionc").checked) {
-          list7[x] = "Option 3";
-        }
-        if (document.getElementById("optiond").checked) {
-          list7[x] = "Option 4";
-        }
-        var cel1 = NewRow.insertCell(0);
-        var cel2 = NewRow.insertCell(1);
-        var cel3 = NewRow.insertCell(2);
-        var cel4 = NewRow.insertCell(3);
-        var cel5 = NewRow.insertCell(4);
-        var cel6 = NewRow.insertCell(5);
-        var cel7 = NewRow.insertCell(6);
-        cel1.innerHTML = list1[x];
-        cel2.innerHTML = list2[x];
-        cel3.innerHTML = list3[x];
-        cel4.innerHTML = list4[x];
-        cel5.innerHTML = list5[x];
-        cel6.innerHTML = list6[x];
-        cel7.innerHTML = list7[x];
-        n++;
-        x++;
-        //e.preventDefault();
-      });
-    </script> -->
   </body>
 </html>

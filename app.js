@@ -235,7 +235,7 @@ app.post("/quiz_created", (req, res) => {
     .then(() => {
       console.log("Successful!");
       console.log(quiz);
-      res.send(quiz);
+      res.redirect("/");
     })
     .catch((e) => {
       console.log(e);
