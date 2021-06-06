@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>Signup Page!</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      input[type="text"],
+      input[type="password"],
+      select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      #form {
+        border-radius: 10px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        margin-top: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 600px;
+      }
+    </style>
+  </head>
+
+  <body
+    style="
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('img/bg.jpg');
+      background-position: center;
+      background-size: cover;
+    "
+  >
+    <h1 style="color: white; text-align: center">Signup Page</h1>
+    <div id="form">
+      <form action="/signup" method="POST">
+        <% if(error){ %><p class="text-danger" style="text-align: center;"><%= error %></p><% } %>
+        <h2>Enter signup details</h2>
+        <br />
+        Username:
+        <input
+          type="text"
+          name="nm"
+          placeholder="Enter your username..."
+        /><br /><br />
+        Password:
+        <input
+          type="password"
+          name="pwd"
+          placeholder="Enter your password..."
+        /><br /><br />
+        Re enter Password:
+        <input
+          type="password"
+          name="pwd2"
+          placeholder="Re enter your password..."
+        /><br /><br />
+        <center>
+          <input
+            type="submit"
+            class="btn btn-warning btn-lg"
+            style="width: 150px"
+            value="Submit"
+          />
+        </center>
+      </form>
+
+      <br />
+    </div>
+  </body>
+</html>
