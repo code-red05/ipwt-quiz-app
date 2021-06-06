@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Attempt a Quiz</title>
+    <title>Quiz Results</title>
     <style>
       /*ANEESH SUBUDHI 19BCT0038 MEHUL RANA 19BCT0033 PRITH SHARMA 19BCT0097*/
       body {
@@ -21,9 +21,10 @@
       input[type="radio"] {
         margin: 5px;
       }
-      table,td{
-          color: white;
-          padding: 5px;
+      table,
+      td {
+        color: white;
+        padding: 5px;
       }
       .questions_view {
         color: white;
@@ -103,37 +104,66 @@
   </head>
   <body>
     <div class="questions_view">
-        <h1 style="text-align: center;"><u>Results</u></h1>
-        <h1 class="text-warning" style="text-align: center"><%= results.quizname%></h1>
-        <br />
-        <h5 style="margin: auto; width: 80%">
-          Here's how you did....
-        </h5><br>
-        <h4 style="margin: auto; width: 80%" class="text-warning">Score: <%= results.score %>/5</h4>
-        <% results.question.forEach(function(e, i){ %>
-        <div class="question_each <% if(results.status[i]==='Right'){ %>bg-success<% } else{ %>bg-danger<% } %>">
-          <p><%= (i+1) %>. <%= e %></p>
-          <input type="radio" name="marked[<%= i %>]" value="optiona" disabled <% if(results.marked[i] === "optiona"){ %>checked<% } %> /><%=
-          results.optiona[i] %><br />
-          <input type="radio" name="marked[<%= i %>]" value="optionb" disabled <% if(results.marked[i] === "optionb"){ %>checked<% } %> /><%=
-          results.optionb[i] %><br />
-          <input type="radio" name="marked[<%= i %>]" value="optionc" disabled <% if(results.marked[i] === "optionc"){ %>checked<% } %> /><%=
-          results.optionc[i] %><br />
-          <input type="radio" name="marked[<%= i %>]" value="optiond" disabled <% if(results.marked[i] === "optiond"){ %>checked<% } %> /><%=
-          results.optiond[i] %><br />
-          <table>
-            <tr><td>Your Answer: </td><td><%= results[results.marked[i]][i] %></td></tr>
-            <tr><td>Correct Answer: </td><td><%= results.correct[i]%></td></tr>
-          </table>
-        </div>
-        <% }) %>
-        <center>
-          <a href="/attempt_quiz"><button
+      <h1 style="text-align: center"><u>Results</u></h1>
+      <h1 class="text-warning" style="text-align: center">
+        <%= results.quizname%>
+      </h1>
+      <br />
+      <h5 style="margin: auto; width: 80%">Here's how you did....</h5>
+      <br />
+      <h4 style="margin: auto; width: 80%" class="text-warning">
+        Score: <%= results.score %>/5
+      </h4>
+      <% results.question.forEach(function(e, i){ %>
+      <div
+        class="
+          question_each
+          <%
+          if(results.status[i]==='Right'){
+          %>bg-success<%
+          }
+          else{
+          %>bg-danger<%
+          }
+          %>
+        "
+      >
+        <p><%= (i+1) %>. <%= e %></p>
+        <input type="radio" name="marked[<%= i %>]" value="optiona" disabled <%
+        if(results.marked[i] === "optiona"){ %>checked<% } %> /><%=
+        results.optiona[i] %><br />
+        <input type="radio" name="marked[<%= i %>]" value="optionb" disabled <%
+        if(results.marked[i] === "optionb"){ %>checked<% } %> /><%=
+        results.optionb[i] %><br />
+        <input type="radio" name="marked[<%= i %>]" value="optionc" disabled <%
+        if(results.marked[i] === "optionc"){ %>checked<% } %> /><%=
+        results.optionc[i] %><br />
+        <input type="radio" name="marked[<%= i %>]" value="optiond" disabled <%
+        if(results.marked[i] === "optiond"){ %>checked<% } %> /><%=
+        results.optiond[i] %><br />
+        <table>
+          <tr>
+            <td>Your Answer:</td>
+            <td><%= results[results.marked[i]][i] %></td>
+          </tr>
+          <tr>
+            <td>Correct Answer:</td>
+            <td><%= results.correct[i]%></td>
+          </tr>
+        </table>
+      </div>
+      <% }) %>
+      <center>
+        <a href="/attempt_quiz"
+          ><button
             type="button"
             class="btn btn-warning btn-lg"
             style="width: 350px"
-          >Back to Attempt Quizzes</button></a>
-        </center>
-      </div>
+          >
+            Back to Attempt Quizzes
+          </button></a
+        >
+      </center>
+    </div>
   </body>
 </html>

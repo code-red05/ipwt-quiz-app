@@ -43,6 +43,12 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {});
 
+app.get("/signup", (req, res) => {
+  res.sendFile(__dirname + "/signup.html");
+});
+
+app.post("/signup", (req, res) => {});
+
 //to fetch quizzes of a particular category
 app.get("/quizcat", (req, res) => {
   if (!req.query.category) {
@@ -173,8 +179,9 @@ app.post("/view_results", (req, res) => {
         correct,
         score,
         status,
+        marked,
       };
-      res.render("views/viewResults", results);
+      res.render("views/viewResults", { results: results });
     })
     .catch((e) => {
       console.log(e);
